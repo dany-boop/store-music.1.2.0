@@ -1,0 +1,26 @@
+package g_v1.demo.model.enums;
+
+import lombok.Getter;
+
+@Getter
+public enum UserRole {
+
+    ROLE_SUPER_ADMIN("SuperAdmin"),
+    ROLE_ADMIN("Admin"),
+    ROLE_USER("User");
+
+    private String description;
+
+    UserRole(String description) {
+        this.description = description;
+    }
+
+    public static UserRole fromDescription(String description) {
+        for (UserRole userRole : UserRole.values()) {
+            if (userRole.description.equals(description)) {
+                return userRole;
+            }
+        }
+        return null;
+    }
+}
