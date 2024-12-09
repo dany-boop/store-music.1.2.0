@@ -45,6 +45,9 @@ public class User extends Entities implements UserDetails {
     @Column(name = "role")
     private UserRole role;
 
+    @Column(name = "photo", length = 255)
+    private String photo;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
