@@ -32,10 +32,10 @@ public class User extends Entities implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "address", nullable = false, length = 255)
+    @Column(name = "address", length = 255)
     private String address;
 
-    @Column(name = "phone", nullable = false, length = 15)
+    @Column(name = "phone", length = 15)
     private String phone;
 
     @Column(nullable = false, unique = true)
