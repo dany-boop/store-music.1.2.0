@@ -1,18 +1,23 @@
-// package g_v1.demo.service;
+package g_v1.demo.service;
 
-// import org.springframework.data.domain.Page;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-// import g_v1.demo.dto.req.PageReq;
-// import g_v1.demo.dto.res.RoleRes;
-// import g_v1.demo.model.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
-// public class RoleService {
-//     Page<RoleRes> getAll(PageReq req);
+import g_v1.demo.dto.req.PageReq;
+import g_v1.demo.dto.res.RoleRes;
+import g_v1.demo.model.entity.User;
+import g_v1.demo.model.enums.UserRole;
 
-//     RoleRes getById(String role);
+public class RoleService {
+    List<RoleRes> getAll();
 
-//     User getOne(String role);
+    RoleRes getByName(String name);
 
+    UserRole getOne(String name);
 
-
-// }
+}
