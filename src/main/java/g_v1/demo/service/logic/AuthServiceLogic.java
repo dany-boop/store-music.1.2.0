@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import g_v1.demo.constant.Constant;
 import g_v1.demo.dto.req.AuthReq;
-import g_v1.demo.dto.req.CustReq;
+// import g_v1.demo.dto.req.CustReq;
 import g_v1.demo.dto.req.UserReq;
 import g_v1.demo.dto.res.AuthRes;
 import g_v1.demo.dto.res.CustRes;
@@ -54,19 +54,22 @@ public class AuthServiceLogic implements AuthService {
 
     @Override
     public CustRes register(AuthReq req) {
+        // Build the UserReq for registration
         UserReq userReq = UserReq.builder()
                 .username(req.getUsername())
                 .password(req.getPassword())
-                .role(UserRole.User) // Assign the role as Customer
+                .role(UserRole.ROLE_USER) // Assign ROLE_USER as the default role for registration
                 .build();
 
+        // Create the user
         UserRes userRes = userService.create(userReq);
 
-        CustReq custreq = CustReq.builder()
-                .userId(userRes.getId())
+        // Map UserRes to CustRes
+        return CustRes.builder()
+                .id(userRes.getId())
+                .username(userRes.getUsername())
+                .role(UserRole.ROLE_USER) // Ensure the role is of type UserRole
                 .build();
-
-        return customerService.create(customerReq);
 
     }
 

@@ -11,6 +11,7 @@ public interface UserService {
     User getOne(String id);
 
     UserRes create(UserReq userReq);
+    UserRes reg(UserReq userReq);
 
     User findByUsername(String username);
 

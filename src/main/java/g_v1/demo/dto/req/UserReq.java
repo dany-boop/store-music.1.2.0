@@ -1,6 +1,7 @@
 package g_v1.demo.dto.req;
 
 import lombok.*;
+import g_v1.demo.model.enums.UserRole;
 
 @Getter
 @Setter
@@ -13,5 +14,5 @@ public class UserReq {
     private String username;
     private String password;
     private String email;
-    private String role;
+    private UserRole role;
 }

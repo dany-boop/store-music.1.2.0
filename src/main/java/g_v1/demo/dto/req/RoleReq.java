@@ -1,4 +1,4 @@
-package g_v1.demo.dto.res;
+package g_v1.demo.dto.req;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -8,6 +8,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleRes extends BaseRes {
+public class RoleReq {
     private String name;
 }
