@@ -1,13 +1,14 @@
 package g_v1.demo.dto.res;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class UserRes {
+@SuperBuilder
+public class UserRes extends BaseRes {
     private String id;
     private String name;
     private String email;

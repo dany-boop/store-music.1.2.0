@@ -41,14 +41,14 @@ public class AuthServiceLogic implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         User user = (User) authenticate.getPrincipal();
         String accessToken = jwtService.generateToken(user);
-        String refreshToken = refreshTokenService.createToken(user.getId());
+        String refreshToken = refreshTokenService.generateRefreshToken(user.getId());
         return AuthRes.builder()
                 .id(user.getId())
                 .token(accessToken)
                 .role(user.getRole().getDescription())
                 .refreshToken(refreshToken)
-                // .createdAt(user.getCreatedAt())
-                // .updatedAt(user.getUpdatedAt())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
                 .build();
     }
 

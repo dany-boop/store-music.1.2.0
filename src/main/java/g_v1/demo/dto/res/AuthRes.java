@@ -1,13 +1,14 @@
 package g_v1.demo.dto.res;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthRes {
+public class AuthRes extends BaseRes {
     private String id;
 
     private String role;
