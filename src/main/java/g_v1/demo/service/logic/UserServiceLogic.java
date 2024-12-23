@@ -33,8 +33,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class UserServiceLogic implements UserService {
 
     private final RoleService roleService;

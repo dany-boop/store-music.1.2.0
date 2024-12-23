@@ -17,7 +17,6 @@ import lombok.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-// @Tag(name = "Authentication")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = Constant.AUTH_API_URL)

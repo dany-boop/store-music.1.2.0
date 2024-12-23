@@ -20,16 +20,19 @@ import g_v1.demo.model.enums.UserRole;
 import g_v1.demo.service.AuthService;
 import g_v1.demo.service.JWTService;
 import g_v1.demo.service.RefreshTokenService;
+import g_v1.demo.service.RoleService;
 import g_v1.demo.service.UserService;
+import g_v1.demo.util.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class AuthServiceLogic implements AuthService {
     private final JWTService jwtService;
-    // private final RoleSer
+    private final RoleService roleService;
     private final RefreshTokenService refreshTokenService;
     private final UserService userService;
+    private final ValidationUtil validationUtil;
     private final AuthenticationManager authenticationManager;
 
     @Override
