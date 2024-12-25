@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -23,8 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
     private final AuthenticationFilter authenticationFilter;
-    private final AccessDeniedHandlerImpl accessDeniedHandlerImpl;
-    private final AuthenticationEntryPointImpl authentiacationEntryPointImpl;
+    private final AccessDeniedHandlerLogic accessDeniedHandlerLogic;
+    private final AuthenticationEntryPointLogic authentiacationEntryPointLogic;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,8 +31,8 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(config -> {
-                    // config.accessDeniedHandler(accessDeniedHandlerImpl)
-                    config.authenticationEntryPoint(authentiacationEntryPointImpl);
+                    config.accessDeniedHandler(accessDeniedHandlerLogic);
+                    config.authenticationEntryPoint(authentiacationEntryPointLogic);
                 })
                 .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req

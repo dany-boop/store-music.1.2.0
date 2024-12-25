@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
+public class AuthenticationEntryPointLogic implements AuthenticationEntryPoint {
     private final ObjectMapper objectMapper;
 
     @Override

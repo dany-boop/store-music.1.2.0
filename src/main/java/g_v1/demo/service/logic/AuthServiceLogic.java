@@ -20,7 +20,6 @@ import g_v1.demo.model.enums.UserRole;
 import g_v1.demo.service.AuthService;
 import g_v1.demo.service.JWTService;
 import g_v1.demo.service.RefreshTokenService;
-import g_v1.demo.service.RoleService;
 import g_v1.demo.service.UserService;
 import g_v1.demo.util.ValidationUtil;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthServiceLogic implements AuthService {
     private final JWTService jwtService;
-    private final RoleService roleService;
     private final RefreshTokenService refreshTokenService;
     private final UserService userService;
     private final ValidationUtil validationUtil;
@@ -37,7 +35,7 @@ public class AuthServiceLogic implements AuthService {
 
     @Override
     public AuthRes login(AuthReq authRequest) {
-
+        validationUtil.validate(authRequest);
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 
