@@ -43,6 +43,12 @@ public class UserServiceLogic implements UserService {
     private final ValidationUtil validationUtil;
     private final PasswordEncoder passwordEncoder;
 
+    // @Value("admin1")
+    // private String ADMIN_USERNAME;
+
+    // @Value("admin1")
+    // private String ADMIN_PASSWORD;
+
     @Value("${app.store-music.admin-username}")
     private String ADMIN_USERNAME;
 
@@ -56,7 +62,7 @@ public class UserServiceLogic implements UserService {
         User user = User.builder()
                 .username(ADMIN_USERNAME)
                 .password(passwordEncoder.encode(ADMIN_PASSWORD))
-                .role(roleService.getOne("Admin"))
+                .role(roleService.getOne("ROLE_ADMIN"))
                 .build();
         userRepository.save(user);
     }
