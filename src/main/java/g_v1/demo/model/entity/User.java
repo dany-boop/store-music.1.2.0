@@ -23,19 +23,19 @@ import g_v1.demo.model.enums.UserRole;
 @Table(name = "m_user")
 public class User extends Entities implements UserDetails {
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", nullable = true, length = 100)
     private String name;
 
-    @Column(name = "username", nullable = false, length = 50, unique = true)
+    @Column(name = "username", nullable = false, length = 100)
     private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "address", length = 255)
+    @Column(name = "address", nullable = true, length = 255)
     private String address;
 
-    @Column(name = "phone", length = 15)
+    @Column(name = "phone", length = 25)
     private String phone;
 
     @Column(nullable = false, unique = true)

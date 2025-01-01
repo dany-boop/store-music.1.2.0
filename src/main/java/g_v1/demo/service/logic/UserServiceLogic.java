@@ -57,8 +57,19 @@ public class UserServiceLogic implements UserService {
 
     @PostConstruct
     public void init() {
-        if (userRepository.existsByUsername(ADMIN_USERNAME))
+        LogUtil.info("Initializing admin user...");
+
+        if (userRepository.existsByUsername(ADMIN_USERNAME)) {
+            LogUtil.info("Admin user already exists.");
             return;
+        }
+        LogUtil.info("Admin username: " + ADMIN_USERNAME);
+
+        // Role adminRole = roleService.getOne("ROLE_ADMIN");
+        // if (adminRole == null) {
+        // throw new IllegalStateException("Admin role 'ROLE_ADMIN' does not exist.");
+        // }
+
         User user = User.builder()
                 .username(ADMIN_USERNAME)
                 .password(passwordEncoder.encode(ADMIN_PASSWORD))
@@ -148,6 +159,27 @@ public class UserServiceLogic implements UserService {
                 .updatedAt(user.getUpdatedAt())
                 .build();
     }
+
+    // @PostConstruct
+    // public void init() {
+    // try {
+    // LogUtil.info("Initializing admin user");
+    // if (userRepository.existsByUsername(ADMIN_USERNAME)) {
+    // LogUtil.info("Admin user already exists");
+    // return;
+    // }
+    // User user = User.builder()
+    // .username(ADMIN_USERNAME)
+    // .password(passwordEncoder.encode(ADMIN_PASSWORD))
+    // .role(roleService.getOne("ROLE_ADMIN"))
+    // .build();
+    // userRepository.save(user);
+    // LogUtil.info("Admin user initialized successfully");
+    // } catch (Exception e) {
+    // LogUtil.error("Error during admin user initialization: ", e);
+    // throw e; // Re-throw the exception for better stack trace visibility
+    // }
+    // }
 
     @Override
     public UserRes update(String id, UserUpdateReq req) {

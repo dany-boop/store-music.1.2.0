@@ -37,7 +37,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         try {
             String bearerToken = req.getHeader(HttpHeaders.AUTHORIZATION);
 
-            if (bearerToken != null && jwtService.isTokenBlackListed(bearerToken)) {
+            if (bearerToken != null && !jwtService.isTokenBlackListed(bearerToken)) {
                 DecodedJWT payload = jwtService.verifyToken(bearerToken);
                 User user = userService.getOne(payload.getSubject());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -53,47 +53,48 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             e.printStackTrace();
         }
 
-        // @Override
-        // protected void doFilterInternal(
-        // @NonNull HttpServletRequest req,
-        // @NonNull HttpServletResponse res,
-        // @NonNull FilterChain filterChain) throws ServletException, IOException {
-        // try {
-        // final String authHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
-
-        // if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-        // filterChain.doFilter(req, res);
-        // return;
-        // }
-
-        // final String jwt = authHeader.substring(7); // Remove "Bearer " prefix
-
-        // // Don't authenticate if token is blacklisted
-        // if (jwtService.isTokenBlackListed(jwt)) {
-        // filterChain.doFilter(req, res);
-        // return;
-        // }
-
-        // // Verify token and get user details
-        // DecodedJWT decodedJWT = jwtService.verifyToken(jwt);
-        // if (decodedJWT != null &&
-        // SecurityContextHolder.getContext().getAuthentication() == null) {
-        // User user = userService.getOne(decodedJWT.getSubject());
-
-        // // Create authentication token
-        // UsernamePasswordAuthenticationToken authToken = new
-        // UsernamePasswordAuthenticationToken(
-        // user,
-        // null,
-        // user.getAuthorities());
-
-        // authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-        // SecurityContextHolder.getContext().setAuthentication(authToken);
-        // }
-        // } catch (Exception e) {
-        // logger.error("Authentication error: ", e);
-        // }
         filterChain.doFilter(req, res);
     }
 
 }
+
+// @Override
+// protected void doFilterInternal(
+// @NonNull HttpServletRequest req,
+// @NonNull HttpServletResponse res,
+// @NonNull FilterChain filterChain) throws ServletException, IOException {
+// try {
+// final String authHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
+
+// if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+// filterChain.doFilter(req, res);
+// return;
+// }
+
+// final String jwt = authHeader.substring(7); // Remove "Bearer " prefix
+
+// // Don't authenticate if token is blacklisted
+// if (jwtService.isTokenBlackListed(jwt)) {
+// filterChain.doFilter(req, res);
+// return;
+// }
+
+// // Verify token and get user details
+// DecodedJWT decodedJWT = jwtService.verifyToken(jwt);
+// if (decodedJWT != null &&
+// SecurityContextHolder.getContext().getAuthentication() == null) {
+// User user = userService.getOne(decodedJWT.getSubject());
+
+// // Create authentication token
+// UsernamePasswordAuthenticationToken authToken = new
+// UsernamePasswordAuthenticationToken(
+// user,
+// null,
+// user.getAuthorities());
+
+// authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
+// SecurityContextHolder.getContext().setAuthentication(authToken);
+// }
+// } catch (Exception e) {
+// logger.error("Authentication error: ", e);
+// }
